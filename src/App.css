@@ -3,6 +3,7 @@
     color: white;
   }
 .format {
+    background-color: #9894c8;
     display: flex;
     justify-content: center;
     align-items: center;
