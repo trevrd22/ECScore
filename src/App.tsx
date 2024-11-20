@@ -1,13 +1,14 @@
-
 import FPB from "./components/FPB";
+import "./App.css";
 
 function App() {
   return (
-    <> 
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", flexDirection: "column" }}>
-      <div >
-        <FPB />
-      </div>
+    <>
+      <div className="format">
+        <h1 style={{ marginBottom: "20px" }}>Trevor's Room Booking Form</h1>
+        <div>
+          <FPB />
+        </div>
       </div>
     </>
   );
