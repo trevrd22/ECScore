@@ -7,7 +7,7 @@ export default function FPB() {
       <>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           onClick={() => {
             alert("WIP");
           }}
@@ -16,7 +16,7 @@ export default function FPB() {
         </Button>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           onClick={() => {
             alert("WIP");
           }}
