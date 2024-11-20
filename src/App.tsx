@@ -1,7 +1,8 @@
 import Home from './home';
 
 function App(){
-return <div><Home /></div>
+
+    return <div><Home /></div>
 
 
 }
