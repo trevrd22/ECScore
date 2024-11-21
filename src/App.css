@@ -1,13 +1,12 @@
-body{
-    background-color: #0f0a41;
-    color: white;
-  }
+body {
+	background-color: #0f0a41;
+	color: white;
+}
 .format {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 106vh;
-    flex-direction: column;
-    transform: translateY(-5%);
-  }
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 106vh;
+	flex-direction: column;
+	transform: translateY(-5%);
+}
