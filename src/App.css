@@ -1,3 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap");
+/* You can find fonts from https://fonts.google.com/ and import them like I did above */
+
+/* 
+The "*" symbol will target everything in ur frontend, so it can be handy but can also shoot urself in the foot, so only
+use it for things you want to be consistent throughout the entire website
+*/
+* {
+	font-family: "Syncopate", sans-serif;
+}
+
+/* 
+Stuff in this css file applies top-down, so whatever has a larger line value, will be displayed
+Eg, 
+body { background-color: white }
+body { background-color: blue }
+The background will be blue and not white
+*/
+
 body {
 	background-color: #0f0a41;
 	color: white;
