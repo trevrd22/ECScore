@@ -1,34 +1,37 @@
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function FrontPage() {
-	return (
-		<div className="format">
+    const navigate = useNavigate(); // Get the navigation function
+
+    return (
+      <div className="format">
         <h1 style={{ marginBottom: "20px" }}>Trevor's Room Booking Form</h1>
         <div>
-		<Stack spacing={2} direction="column">
-			<>
-				<Button
-					variant="contained"
-					color="secondary"
-					onClick={() => {
-						alert("WIP");
-					}}
-				>
-					Book A Room
-				</Button>
-				<Button
-					variant="contained"
-					color="secondary"
-					onClick={() => {
-						alert("WIP");
-					}}
-				>
-					View Room Booking Statuses
-				</Button>
-			</>
-		</Stack>
-		</div>
-		</div>
-	);
-}
+          <Stack spacing={2} direction="column">
+            <>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+					navigate("/form");
+                }}
+              >
+                Book A Room
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  navigate("/stattrak");
+                }}
+              >
+                View Room Booking Statuses
+              </Button>
+            </>
+          </Stack>
+        </div>
+      </div>
+    );
+};
