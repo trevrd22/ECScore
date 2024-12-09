@@ -6,14 +6,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/">
-        <div className="format">
-        <h1 style={{ marginBottom: "20px" }}>Trevor's Room Booking Form</h1>
-        <div>
-          <FPB />
-        </div>
-      </div>
-      </Route>
+        <Route path="/" element={<FPB />} /> 
       </Routes>
     </Router>
   );

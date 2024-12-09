@@ -3,6 +3,9 @@ import Button from "@mui/material/Button";
 
 export default function FPB() {
 	return (
+		<div className="format">
+        <h1 style={{ marginBottom: "20px" }}>Trevor's Room Booking Form</h1>
+        <div>
 		<Stack spacing={2} direction="column">
 			<>
 				<Button
@@ -25,5 +28,7 @@ export default function FPB() {
 				</Button>
 			</>
 		</Stack>
+		</div>
+		</div>
 	);
 }
