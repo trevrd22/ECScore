@@ -13,7 +13,7 @@ export default function FrontPage() {
             <>
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 onClick={() => {
 					navigate("/form");
                 }}
@@ -22,7 +22,7 @@ export default function FrontPage() {
               </Button>
               <Button
                 variant="contained"
-                color="secondary"
+                color="primary"
                 onClick={() => {
                   navigate("/stattrak");
                 }}
