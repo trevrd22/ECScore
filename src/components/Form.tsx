@@ -1,6 +1,8 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import React, { useState, useRef } from "react";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Slide from "@mui/material/Slide";
 
 class Answers {
   timestamp: Date;
@@ -118,10 +120,9 @@ class Answers {
 
   // Getters
 
-getTimestamp(): Date{
-
-  return this.timestamp
-}
+  getTimestamp(): Date {
+    return this.timestamp;
+  }
 
   getName(): string | undefined {
     return this.name;
@@ -210,6 +211,7 @@ getTimestamp(): Date{
 
 export default function Form() {
   const answer = new Answers();
+  const [isNameAnswered, setIsNameAnswered] = useState(false);
 
   const names = [
     "Richard Luong",
@@ -231,7 +233,7 @@ export default function Form() {
 
   return (
     <div className="format">
-      <h1>What is Your Name?</h1>
+      <h2>What is Your Name?</h2>
       <div>
         <Autocomplete
           id="nameInput"
@@ -242,12 +244,40 @@ export default function Form() {
             if (newValue) {
               // Only call setName if newValue is not null
               answer.setName(newValue); // Update the selected name
+              setIsNameAnswered(true);
               console.log("Updated Answer Object:", answer);
             }
           }}
           renderInput={(params) => <TextField {...params} label="Name" />}
         />
       </div>
+      {isNameAnswered && (
+        
+          <div style={{ textAlign: "center", justifyContent: "center" }}>
+            <Slide direction="left" in={true} mountOnEnter unmountOnExit timeout={400}>
+            <h2 style={{ marginTop: "20px" }}>Event Title?</h2>
+            </Slide>
+            <Box
+              component="form"
+              sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+              noValidate
+              autoComplete="off"
+            />
+<Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={400}>
+            <TextField
+              id="outlined-basic"
+              label="Title"
+              variant="outlined"
+              onChange={(event) => {
+                const eventTitle = event.target.value; // Get the input value
+                answer.setEventTitle(eventTitle); // Update the answer object
+                console.log("Updated Event Title:", answer.getEventTitle());
+              }}
+            />
+            </Slide>
+          </div>
+        
+      )}
     </div>
   );
 }
