@@ -1,8 +1,13 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import React, { useState, useRef } from "react";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import Stack from "@mui/material/Stack";
 
 class Answers {
   timestamp: Date;
@@ -211,7 +216,21 @@ class Answers {
 
 export default function Form() {
   const answer = new Answers();
-  const [isNameAnswered, setIsNameAnswered] = useState(false);
+  const toggledIndices = useRef(new Set<number>()); // Track toggled indices
+  const [boolArray, setBoolArray] = useState(new Array(21).fill(false));
+
+  const toggleIndexPerm = (index: number) => {
+    if (toggledIndices.current.has(index)) {
+      return; // Skip if already toggled
+    }
+
+    // Mark the index as toggled
+    toggledIndices.current.add(index);
+
+    setBoolArray((prevArray) =>
+      prevArray.map((value, i) => (i === index ? !value : value))
+    );
+  };
 
   const names = [
     "Richard Luong",
@@ -234,6 +253,7 @@ export default function Form() {
   return (
     <div className="format">
       <h2>What is Your Name?</h2>
+
       <div>
         <Autocomplete
           id="nameInput"
@@ -244,39 +264,131 @@ export default function Form() {
             if (newValue) {
               // Only call setName if newValue is not null
               answer.setName(newValue); // Update the selected name
-              setIsNameAnswered(true);
+              toggleIndexPerm(0);
               console.log("Updated Answer Object:", answer);
             }
           }}
           renderInput={(params) => <TextField {...params} label="Name" />}
         />
       </div>
-      {isNameAnswered && (
-        
-          <div style={{ textAlign: "center", justifyContent: "center" }}>
-            <Slide direction="left" in={true} mountOnEnter unmountOnExit timeout={400}>
+
+      {boolArray[0] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="left"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
             <h2 style={{ marginTop: "20px" }}>Event Title?</h2>
-            </Slide>
-            <Box
-              component="form"
-              sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
-              noValidate
-              autoComplete="off"
-            />
-<Slide direction="right" in={true} mountOnEnter unmountOnExit timeout={400}>
+          </Slide>
+          <Box
+            component="form"
+            sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+            noValidate
+            autoComplete="off"
+          />
+          <Slide
+            direction="right"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
             <TextField
-              id="outlined-basic"
+              id="eventTitle"
               label="Title"
               variant="outlined"
               onChange={(event) => {
-                const eventTitle = event.target.value; // Get the input value
+                const eventTitle = event.target.value.trim(); // Get the input value
                 answer.setEventTitle(eventTitle); // Update the answer object
-                console.log("Updated Event Title:", answer.getEventTitle());
+                toggleIndexPerm(1);
               }}
             />
-            </Slide>
+          </Slide>
+        </div>
+      )}
+
+      {boolArray[1] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="right"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <h2 style={{ marginTop: "20px" }}>Event Description?</h2>
+          </Slide>
+          <Box
+            component="form"
+            sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+            noValidate
+            autoComplete="off"
+          />
+          <Slide
+            direction="left"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <TextField
+              id="eventDescription"
+              label="Description"
+              variant="outlined"
+              multiline
+              fullWidth
+              minRows={2}
+              onChange={(event) => {
+                const eventDescription = event.target.value.trim(); // Get the input value
+                answer.setEventDescription(eventDescription); // Update the answer object
+                toggleIndexPerm(2);
+              }}
+            />
+          </Slide>
+        </div>
+      )}
+
+      {boolArray[2] && (
+        <Slide
+          direction="up"
+          in={true}
+          mountOnEnter
+          unmountOnExit
+          timeout={350}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              justifyContent: "center",
+              display: "static"
+            }}
+          >
+            <Stack
+              direction="column"
+            >
+              <h2 style={{ marginTop: "20px" }}>When is your Event?</h2>
+              <Stack
+              direction="row"
+              spacing={2}
+            >
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DateTimePicker"]}>
+                  <DateTimePicker label="Start Time" sx={{ width: "200px" }} />
+                </DemoContainer>
+              </LocalizationProvider>
+
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DateTimePicker"]}>
+                  <DateTimePicker label="End Time" sx={{ width: "200px" }} />
+                </DemoContainer>
+              </LocalizationProvider>
+              </Stack>
+            </Stack>
           </div>
-        
+        </Slide>
       )}
     </div>
   );
