@@ -9,6 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import type { Dayjs } from "dayjs";
+import Typography from '@mui/material/Typography';
 
 class Answers {
   timestamp: Date;
@@ -17,7 +18,6 @@ class Answers {
   startDate?: Date;
   endDate?: Date;
   eventTitle?: string;
-  attendance?: number;
   room?: string;
   eventDescription?: string;
   roomSecondChoice?: string;
@@ -58,10 +58,6 @@ class Answers {
 
   setEventTitle(eventTitle: string): void {
     this.eventTitle = eventTitle;
-  }
-
-  setAttendance(attendance: number): void {
-    this.attendance = attendance;
   }
 
   setRoom(room: string): void {
@@ -150,10 +146,6 @@ class Answers {
     return this.eventTitle;
   }
 
-  getAttendance(): number | undefined {
-    return this.attendance;
-  }
-
   getRoom(): string | undefined {
     return this.room;
   }
@@ -218,7 +210,7 @@ class Answers {
 export default function Form() {
   const answer = new Answers();
   const toggledIndices = useRef(new Set<number>()); // Track toggled indices
-  const [boolArray, setBoolArray] = useState(new Array(21).fill(false));
+  const [boolArray, setBoolArray] = useState(new Array(20).fill(false));
 
   const toggleIndexPerm = (index: number) => {
     if (toggledIndices.current.has(index)) {
@@ -232,6 +224,31 @@ export default function Form() {
       prevArray.map((value, i) => (i === index ? !value : value))
     );
   };
+
+  const buildings: string[] = [
+    "Cullen College of Engineering Building",
+    "Agnes Arnold Auditorium",
+    "Agnes Arnold Hall",
+    "Architecture Building",
+    "Cemo Hall (CEMO)",
+    "Classroom and Business Building (CBB)",
+    "Cougar Village",
+    "Elizabeth D. Rockwell Pavillion",
+    "Farish Hall",
+    "Fleming Building",
+    "Fred J. Heyne Building",
+    "Garrison Gym",
+    "Honors College",
+    "Isabel C. Cameron",
+    "Oberholtzer Hall",
+    "Philip Guthrie Hoffman Hall (PGH)",
+    "Science and Engineering Complex (SEC)",
+    "Science and Research 1 (SR1)",
+    "Science Building",
+    "Student Center North and South",
+    "Teaching Unit 2",
+    "Other Building"
+  ];
 
   const names = [
     "Richard Luong",
@@ -253,8 +270,8 @@ export default function Form() {
 
   return (
     <div className="format">
+      {/* name question */}
       <h2>What is Your Name?</h2>
-
       <div>
         <Autocomplete
           id="nameInput"
@@ -273,6 +290,7 @@ export default function Form() {
         />
       </div>
 
+      {/* event title question*/}
       {boolArray[0] && (
         <div style={{ textAlign: "center", justifyContent: "center" }}>
           <Slide
@@ -310,7 +328,7 @@ export default function Form() {
           </Slide>
         </div>
       )}
-
+      {/* event description question*/}
       {boolArray[1] && (
         <div style={{ textAlign: "center", justifyContent: "center" }}>
           <Slide
@@ -351,7 +369,7 @@ export default function Form() {
           </Slide>
         </div>
       )}
-
+      {/* start and end times questions*/}
       {boolArray[2] && (
         <Slide
           direction="up"
@@ -402,6 +420,57 @@ export default function Form() {
             </Stack>
           </div>
         </Slide>
+      )}
+
+      {/* what room question*/}
+      {boolArray[3] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="right"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <h2 style={{ marginTop: "20px" }}>What Building?</h2>
+          </Slide>
+
+          <Slide
+            direction="left"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <Autocomplete
+          id="nameInput"
+          autoSelect
+          fullWidth
+          sx={{ width: 375, marginLeft: "15px"}}
+          options={buildings}
+          onChange={(event, newValue) => {
+            if (newValue) {
+              // Only call setName if newValue is not null
+              answer.setBuilding(newValue); // Update the selected name
+              toggleIndexPerm(4);
+            }
+          }}
+          renderInput={(params) => <TextField {...params} label="Building" />}
+        />
+          </Slide>
+
+          <Slide
+            direction="up"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+
+<Typography variant="subtitle1" gutterBottom> Don't know which building is which? click <a href="https://uh.edu/maps/" target="_blank" rel="noopener noreferrer" style={{ font: "inherit" }}>me</a>! <br /> If you'd like to reserve a room not listed, select "Other Building".</Typography>
+          </Slide>
+
+        </div>
       )}
     </div>
   );
