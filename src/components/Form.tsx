@@ -9,7 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import type { Dayjs } from "dayjs";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 class Answers {
   timestamp: Date;
@@ -210,7 +210,28 @@ class Answers {
 export default function Form() {
   const answer = new Answers();
   const toggledIndices = useRef(new Set<number>()); // Track toggled indices
-  const [boolArray, setBoolArray] = useState(new Array(20).fill(false));
+  const [boolArray, setBoolArray] = useState(new Array(40).fill(false));
+  const prevIndexRef = useRef<number>(-1); // Initialize with -1 to represent no index selected
+
+  const toggleIndexTemp = (newIndex: number) => {
+    // If the previous index is valid, set it to false
+    if (prevIndexRef.current !== -1 && prevIndexRef.current !== newIndex) {
+      setBoolArray((prevArray) => {
+        const updatedArray = [...prevArray];
+        updatedArray[prevIndexRef.current] = false; // Disable old index
+        updatedArray[newIndex] = true; // Enable new index
+        return updatedArray;
+      });
+    } else if (prevIndexRef.current !== newIndex) {
+      setBoolArray((prevArray) => {
+        const updatedArray = [...prevArray];
+        updatedArray[newIndex] = true; // Enable new index
+        return updatedArray;
+      });
+    }
+
+    prevIndexRef.current = newIndex; // Update the previous index to the current one
+  };
 
   const toggleIndexPerm = (index: number) => {
     if (toggledIndices.current.has(index)) {
@@ -247,7 +268,8 @@ export default function Form() {
     "Science Building",
     "Student Center North and South",
     "Teaching Unit 2",
-    "Other Building"
+    "Other Building",
+    "Outdoor Space",
   ];
 
   const names = [
@@ -442,23 +464,130 @@ export default function Form() {
             unmountOnExit
             timeout={350}
           >
-            <Autocomplete
-          id="nameInput"
-          autoSelect
-          fullWidth
-          sx={{ width: 375, marginLeft: "15px"}}
-          options={buildings}
-          onChange={(event, newValue) => {
-            if (newValue) {
-              // Only call setName if newValue is not null
-              answer.setBuilding(newValue); // Update the selected name
-              toggleIndexPerm(4);
-            }
-          }}
-          renderInput={(params) => <TextField {...params} label="Building" />}
-        />
-          </Slide>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Autocomplete
+                id="buildingInput"
+                autoSelect
+                fullWidth
+                sx={{ width: 375 }}
+                options={buildings}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    answer.setBuilding(newValue); // Update the selected name
+                    console.log(answer.getBuilding());
+                    /* This will be the key to which indice is which*/
+                    switch (answer.getBuilding()) {
+                      case "Cullen College of Engineering Building":
+                        toggleIndexTemp(4);
+                        break;
 
+                      case "Agnes Arnold Auditorium":
+                        toggleIndexTemp(5);
+                        break;
+
+                      case "Agnes Arnold Hall":
+                        toggleIndexTemp(6);
+                        break;
+
+                      case "Architecture Building":
+                        toggleIndexTemp(7);
+                        break;
+
+                      case "Classroom and Business Building (CBB)":
+                        toggleIndexTemp(8);
+                        break;
+
+                      case "Cemo Hall (CEMO)":
+                        toggleIndexTemp(9);
+                        break;
+
+                      case "Cougar Village":
+                        toggleIndexTemp(10);
+                        break;
+
+                      case "Elizabeth D. Rockwell Pavillion":
+                        toggleIndexTemp(11);
+                        break;
+
+                      case "Farish Hall":
+                        toggleIndexTemp(12);
+                        break;
+
+                      case "Fleming Building":
+                        toggleIndexTemp(13);
+                        break;
+
+                      case "Fred J. Heyne Building":
+                        toggleIndexTemp(14);
+                        break;
+
+                      case "Garrison Gym":
+                        toggleIndexTemp(15);
+                        break;
+
+                      case "Honors College":
+                        toggleIndexTemp(16);
+                        break;
+
+                      case "Isabel C. Cameron":
+                        toggleIndexTemp(17);
+                        break;
+
+                      case "Oberholtzer Hall":
+                        toggleIndexTemp(18);
+                        break;
+
+                      case "Outdoor Space":
+                        toggleIndexTemp(19);
+                        break;
+
+                      case "Philip Guthrie Hoffman Hall (PGH)":
+                        toggleIndexTemp(20);
+                        break;
+
+                      case "Science and Engineering Complex (SEC)":
+                        toggleIndexTemp(21);
+                        break;
+
+                      case "Science and Research 1 (SR1)":
+                        toggleIndexTemp(22);
+                        break;
+
+                      case "Science Building":
+                        toggleIndexTemp(23);
+                        break;
+
+                      case "Student Center North and South":
+                        toggleIndexTemp(24);
+                        break;
+
+                      case "Teaching Unit 2":
+                        toggleIndexTemp(25);
+                        break;
+
+                      case "Other Building":
+                        toggleIndexTemp(26);
+                        break;
+
+                      default:
+                        // Optional default case
+                        console.log("Building not found or selected");
+                        break;
+                    }
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Building" />
+                )}
+              />
+            </Box>
+          </Slide>
           <Slide
             direction="up"
             in={true}
@@ -466,10 +595,22 @@ export default function Form() {
             unmountOnExit
             timeout={350}
           >
-
-<Typography variant="subtitle1" gutterBottom> Don't know which building is which? click <a href="https://uh.edu/maps/" target="_blank" rel="noopener noreferrer" style={{ font: "inherit" }}>me</a>! <br /> If you'd like to reserve a room not listed, select "Other Building".</Typography>
+            <Typography variant="subtitle1" gutterBottom>
+              {" "}
+              Don't know which building is which? click{" "}
+              <a
+                href="https://uh.edu/maps/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ font: "inherit" }}
+              >
+                me
+              </a>
+              ! <br /> If you'd like to reserve a room not listed select "Other
+              Building". <br /> Select "Outdoor Space" to reserve an outdoor
+              space! (lol)
+            </Typography>
           </Slide>
-
         </div>
       )}
     </div>
