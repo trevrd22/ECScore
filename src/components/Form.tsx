@@ -1,5 +1,5 @@
 import Autocomplete from "@mui/material/Autocomplete";
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -8,6 +8,7 @@ import { DateTimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
+import type { Dayjs } from "dayjs";
 
 class Answers {
   timestamp: Date;
@@ -363,28 +364,40 @@ export default function Form() {
             style={{
               textAlign: "center",
               justifyContent: "center",
-              display: "static"
+              display: "static",
             }}
           >
-            <Stack
-              direction="column"
-            >
+            <Stack direction="column">
               <h2 style={{ marginTop: "20px" }}>When is your Event?</h2>
-              <Stack
-              direction="row"
-              spacing={2}
-            >
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DateTimePicker"]}>
-                  <DateTimePicker label="Start Time" sx={{ width: "200px" }} />
-                </DemoContainer>
-              </LocalizationProvider>
+              <Stack direction="row" spacing={2}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DateTimePicker"]}>
+                    <DateTimePicker
+                      label="Start Time"
+                      sx={{ width: "200px" }}
+                      onChange={(newValue: Dayjs | null) => {
+                        answer.setStartDate(
+                          newValue ? newValue.toDate() : new Date()
+                        );
+                      }}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DateTimePicker"]}>
-                  <DateTimePicker label="End Time" sx={{ width: "200px" }} />
-                </DemoContainer>
-              </LocalizationProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DateTimePicker"]}>
+                    <DateTimePicker
+                      label="End Time"
+                      sx={{ width: "200px" }}
+                      onChange={(newValue: Dayjs | null) => {
+                        answer.setEndDate(
+                          newValue ? newValue.toDate() : new Date()
+                        );
+                        toggleIndexPerm(3);
+                      }}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
               </Stack>
             </Stack>
           </div>
