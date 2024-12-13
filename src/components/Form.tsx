@@ -213,6 +213,7 @@ export default function Form() {
   const [boolArray, setBoolArray] = useState(new Array(40).fill(false));
   const prevIndexRef = useRef<number>(-1); // Initialize with -1 to represent no index selected
 
+
   const toggleIndexTemp = (newIndex: number) => {
     // If the previous index is valid, set it to false
     if (prevIndexRef.current !== -1 && prevIndexRef.current !== newIndex) {
@@ -291,10 +292,10 @@ export default function Form() {
   ];
 
   return (
-    <div className="format">
+    <div className="formatForm">
       {/* name question */}
+      
       <h2>What is Your Name?</h2>
-      <div>
         <Autocomplete
           id="nameInput"
           autoSelect
@@ -310,7 +311,7 @@ export default function Form() {
           }}
           renderInput={(params) => <TextField {...params} label="Name" />}
         />
-      </div>
+
 
       {/* event title question*/}
       {boolArray[0] && (
@@ -613,6 +614,37 @@ export default function Form() {
           </Slide>
         </div>
       )}
+
+{boolArray[4] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="right"
+            in={boolArray[4]}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <h2 style={{ marginTop: "20px" }}>Engineering</h2>
+          </Slide>
+          <h2 style={{ marginTop: "20px" }}>Engineering</h2>
+          <h2 style={{ marginTop: "20px" }}>Engineering</h2>
+</div>
+)}
+
+{boolArray[5] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="right"
+            in={boolArray[5]}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <h2 style={{ marginTop: "20px" }}>Agnes</h2>
+          </Slide>
+</div>
+)}
+
     </div>
   );
 }
