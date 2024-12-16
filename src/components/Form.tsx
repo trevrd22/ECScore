@@ -10,6 +10,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import type { Dayjs } from "dayjs";
 import Typography from "@mui/material/Typography";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
 
 class Answers {
   timestamp: Date;
@@ -212,7 +216,11 @@ export default function Form() {
   const toggledIndices = useRef(new Set<number>()); // Track toggled indices
   const [boolArray, setBoolArray] = useState(new Array(40).fill(false));
   const prevIndexRef = useRef<number>(-1); // Initialize with -1 to represent no index selected
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  const handleClick = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   const toggleIndexTemp = (newIndex: number) => {
     // If the previous index is valid, set it to false
@@ -294,24 +302,22 @@ export default function Form() {
   return (
     <div className="formatForm">
       {/* name question */}
-      
       <h2>What is Your Name?</h2>
-        <Autocomplete
-          id="nameInput"
-          autoSelect
-          sx={{ width: 300 }}
-          options={names}
-          onChange={(event, newValue) => {
-            if (newValue) {
-              // Only call setName if newValue is not null
-              answer.setName(newValue); // Update the selected name
-              toggleIndexPerm(0);
-              console.log("Updated Answer Object:", answer);
-            }
-          }}
-          renderInput={(params) => <TextField {...params} label="Name" />}
-        />
-
+      <Autocomplete
+        id="nameInput"
+        autoSelect
+        sx={{ width: 300 }}
+        options={names}
+        onChange={(event, newValue) => {
+          if (newValue) {
+            // Only call setName if newValue is not null
+            answer.setName(newValue); // Update the selected name
+            toggleIndexPerm(0);
+            console.log("Updated Answer Object:", answer);
+          }
+        }}
+        renderInput={(params) => <TextField {...params} label="Name" />}
+      />
 
       {/* event title question*/}
       {boolArray[0] && (
@@ -615,7 +621,7 @@ export default function Form() {
         </div>
       )}
 
-{boolArray[4] && (
+      {boolArray[4] && (
         <div style={{ textAlign: "center", justifyContent: "center" }}>
           <Slide
             direction="right"
@@ -624,14 +630,99 @@ export default function Form() {
             unmountOnExit
             timeout={350}
           >
-            <h2 style={{ marginTop: "20px" }}>Engineering</h2>
+            <h2 style={{ marginTop: "20px" }}>What Room?</h2>
           </Slide>
-          <h2 style={{ marginTop: "20px" }}>Engineering</h2>
-          <h2 style={{ marginTop: "20px" }}>Engineering</h2>
-</div>
-)}
+          <Slide
+            direction="left"
+            in={boolArray[4]}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <Stack
+              direction="row"
+              spacing={2}
+              style={{
+                width: "100%",
+                margin: "0 auto",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+              <img
+                src="/images/engineering.jpg"
+                alt="Engineering"
+                onClick={handleClick}
+                style={{
+                  width: isExpanded ? "500px" : "200px",
+                  transition: "width 0.3s ease",
+                  cursor: "pointer",
+                }}
+              />
+              <FormControl margin="none" size="small">
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="Commons"
+                  name="radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="Commons"
+                    control={<Radio />}
+                    label="Commons (Engineering Pit)"
+                  />
+                  <FormControlLabel
+                    value="W205D3"
+                    control={<Radio />}
+                    label="W205 D3 [65]"
+                  />
+                  <FormControlLabel
+                    value="E220D3"
+                    control={<Radio />}
+                    label="E220 D3 [26]"
+                  />
+                  <FormControlLabel
+                    value="102D"
+                    control={<Radio />}
+                    label="102D [44]"
+                  />
+                  <FormControlLabel
+                    value="N61D"
+                    control={<Radio />}
+                    label="N61D [48]"
+                  />
+                  <FormControlLabel
+                    value="W122D3"
+                    control={<Radio />}
+                    label="W122 D3 [124]"
+                  />
+                  <FormControlLabel
+                    value="L2D2"
+                    control={<Radio />}
+                    label="L2D2 [220]"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Stack>
+          </Slide>
+          <Slide
+            direction="up"
+            in={boolArray[4]}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
 
-{boolArray[5] && (
+              <div style={{ textAlign: "left",  paddingLeft: "10px"}}>
+                <Typography variant="subtitle1" gutterBottom>
+                  brackets indicate capacity
+                </Typography>
+              </div>
+          </Slide>
+        </div>
+      )}
+
+      {boolArray[5] && (
         <div style={{ textAlign: "center", justifyContent: "center" }}>
           <Slide
             direction="right"
@@ -642,9 +733,8 @@ export default function Form() {
           >
             <h2 style={{ marginTop: "20px" }}>Agnes</h2>
           </Slide>
-</div>
-)}
-
+        </div>
+      )}
     </div>
   );
 }

@@ -40,9 +40,21 @@ body {
 
 .formatForm {
 	display: flex;
-	justify-content: center;
+	/*justify-content: center;*/
+	align-items: center;
+	height: 100vh;
+	overflow-y: auto;
+	flex-direction: column;
+	padding-top: 35vh;
+	padding-bottom: 50vh;
+}
+
+.formatTest {
+	display: flex;
+	/*justify-content: center;*/
 	align-items: center;
 	height: 100vh;
 	overflow-y: auto;
 	flex-direction: column;
 }
+
