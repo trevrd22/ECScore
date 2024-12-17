@@ -282,6 +282,17 @@ export default function Form() {
     "Outdoor Space",
   ];
 
+  interface RadioOption {
+    value: string;
+    label: string;
+  }
+  
+  interface Room {
+    imageSrc: string;
+    radioOptions: RadioOption[];
+  }
+
+
   const names = [
     "Richard Luong",
     "Emily Nguyen",
@@ -300,17 +311,24 @@ export default function Form() {
     "Trieu Dinh",
   ];
 
-  const rooms = [
+  const rooms: Room[] = [
     {
       imageSrc: "/images/engineering.jpg",
       radioOptions: [
-        { value: "Commons", label: "Commons (Engineering Pit)" },
-        { value: "W205D3", label: "W205 D3 [65]" },
-        { value: "E220D3", label: "E220 D3 [26]" },
-        { value: "102D", label: "102D [44]" },
-        { value: "N61D", label: "N61D [48]" },
-        { value: "W122D3", label: "W122 D3 [124]" },
-        { value: "L2D2", label: "L2D2 [220]" },
+        { value: "commons", label: "Commons (Engineering Pit)" },
+        { value: "w205d3", label: "W205 D3 [65]" },
+        { value: "e220d3", label: "E220 D3 [26]" },
+        { value: "102d", label: "102D [44]" },
+        { value: "n61d", label: "N61D [48]" },
+        { value: "w122d3", label: "W122 D3 [124]" },
+        { value: "l2d2", label: "L2D2 [220]" },
+      ],
+    },
+    {
+      imageSrc: "/images/aaa.jpg",
+      radioOptions: [
+        { value: "AAA1", label: "AAA 1 [?]" },
+        { value: "AAA2", label: "AAA 2 [?]" },
       ],
     },
     {
@@ -328,10 +346,9 @@ export default function Form() {
       ],
     },
     {
-      imageSrc: "/images/aaa.jpg",
+      imageSrc: "/images/cemo.jpg",
       radioOptions: [
-        { value: "AAA1", label: "AAA 1 [?]" },
-        { value: "AAA2", label: "AAA 2 [?]" },
+        { value: "cemo100d", label: "CEMO 100D [431](may be unavailable)" },
       ],
     },
     {
@@ -346,12 +363,6 @@ export default function Form() {
         { value: "cbb122", label: "CBB 122 [80]" },
         { value: "cbb124", label: "CBB 124 [80]" },
         { value: "cbb214", label: "CBB 214 [48]" },
-      ],
-    },
-    {
-      imageSrc: "/images/cemo.jpg",
-      radioOptions: [
-        { value: "cemo100d", label: "CEMO 100D [431](may be unavailable)" },
       ],
     },
     {
@@ -383,68 +394,108 @@ export default function Form() {
     {
       imageSrc: "/images/fleming.jpg",
       radioOptions: [
-        { value: "f154", label: "F 154" },
-        { value: "f160", label: "F 160" },
+        { value: "f154", label: "F 154 [40]" },
+        { value: "f160", label: "F 160 [308]" },
       ],
     },
     {
       imageSrc: "/images/fred.jpg",
       radioOptions: [
-        { value: "h28", label: "H 28" },
-        { value: "h30", label: "H 30" },
-        { value: "h34", label: "H 34" },
+        { value: "h28", label: "H 28 [?]" },
+        { value: "h30", label: "H 30 [?]" },
+        { value: "h34", label: "H 34 [?]" },
       ],
     },
     {
       imageSrc: "/images/garrison.jpg",
       radioOptions: [
-        { value: "garg201", label: "GAR G 201" },
-        { value: "garg202", label: "GAR G 202" },
+        { value: "garg201", label: "GAR G 201 [97]" },
+        { value: "garg202", label: "GAR G 202 [164]" },
       ],
     },
     {
       imageSrc: "/images/honors.jpg",
-      radioOptions: [{ value: "212C", label: "212C (The Co" }],
+      radioOptions: [
+        { value: "212c", label: "212C (The Commons)[60]" },
+        { value: "212s", label: "212S (Large Classroom)[49] " },
+        { value: "212p", label: "212P (Martel Room)[20]" },
+        { value: "202b", label: "202B (Deans Conference Room)[10]" },
+        { value: "212d", label: "212D (Estess Library)[24]" },
+        { value: "212j", label: "212J (Fishbowl 1)[22]" },
+        { value: "212l", label: "212L (Fishbowl 2)[25]" },
+        { value: "212", label: "212 (Computer Center)[16]" },
+      ],
     },
     {
       imageSrc: "/images/isabel.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [
+        { value: "cam105", label: "CAM 105 [28]" },
+        { value: "cam101", label: "CAM 101 [69]" },
+        { value: "cam103", label: "CAM 103 [29]" },
+      ],
     },
     {
       imageSrc: "/images/oberholtzer.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
-    },
-    {
-      imageSrc: "/images/outdoor.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [{ value: "inprogress", label: "Ober-inprogress" }],
     },
     {
       imageSrc: "/images/pgh.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [{ value: "inprogress", label: "PGH-inprogress" }],
     },
     {
       imageSrc: "/images/sec.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [
+        { value: "sec100", label: "SEC 100 (SEC Auditorium)[546]" },
+        { value: "sec101", label: "SEC 101 [280]" },
+        { value: "sec102", label: "SEC 102 [228]" },
+        { value: "sec104", label: "SEC 104 [136]" },
+        { value: "sec105", label: "SEC 105 [109]" },
+        { value: "sec201", label: "SEC 201 [56]" },
+        { value: "sec202", label: "SEC 202 [60]" },
+        { value: "sec203", label: "SEC 203 [55]" },
+        { value: "sec204", label: "SEC 204 [63]" },
+        { value: "sec205", label: "SEC 205 [61]" },
+        { value: "sec206", label: "SEC 206 [61]" },
+      ],
     },
     {
       imageSrc: "/images/sr1.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [
+        { value: "sr116", label: "SR 116 [202]" },
+        { value: "sr117", label: "SR 117 [303]" },
+      ],
     },
     {
       imageSrc: "/images/science.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [
+        { value: "s101", label: "S 101 [36]" },
+        { value: "s102", label: "S 102 [38]" },
+        { value: "s105", label: "S 105 [96]" },
+        { value: "s114", label: "S 114 [50]" },
+        { value: "s116", label: "S 116 [46]" },
+        { value: "s120", label: "S 120 [42]" },
+        { value: "s202", label: "S 202 [36]" },
+      ],
     },
     {
       imageSrc: "/images/student.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [{ value: "inprogress", label: "student-inprogress" }],
     },
     {
       imageSrc: "/images/tu2.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [{ value: "tu2144", label: "TU2 144 [106]" },
+        { value: "tu2211", label: "TU2 211 [72]" },
+        { value: "tu2215", label: "TU2 215 [35]" },
+        { value: "tu2240", label: "TU2 240 [98]" },
+      ],
     },
     {
       imageSrc: "/images/other.jpg",
-      radioOptions: [{ value: "unavailable", label: "cu" }],
+      radioOptions: [{ value: "figureitout", label: "other-figureitout" }],
+    },
+    {
+      imageSrc: "/images/outdoor.jpg",
+      radioOptions: [{ value: "inprogress", label: "outdoor-inprogress" }],
     },
   ];
 
