@@ -14,6 +14,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
+import RoomSelection from "./RoomSelection";
 
 class Answers {
   timestamp: Date;
@@ -297,6 +298,154 @@ export default function Form() {
     "Mi Mach",
     "Trevor Drummond",
     "Trieu Dinh",
+  ];
+
+  const rooms = [
+    {
+      imageSrc: "/images/engineering.jpg",
+      radioOptions: [
+        { value: "Commons", label: "Commons (Engineering Pit)" },
+        { value: "W205D3", label: "W205 D3 [65]" },
+        { value: "E220D3", label: "E220 D3 [26]" },
+        { value: "102D", label: "102D [44]" },
+        { value: "N61D", label: "N61D [48]" },
+        { value: "W122D3", label: "W122 D3 [124]" },
+        { value: "L2D2", label: "L2D2 [220]" },
+      ],
+    },
+    {
+      imageSrc: "/images/agnes.jpg",
+      radioOptions: [{ value: "unavailable", label: "Currently Unavailable!" }],
+    },
+    {
+      imageSrc: "/images/archi.jpg",
+      radioOptions: [
+        { value: "room402", label: "Room 402 [40]" },
+        { value: "room209", label: "Room 209 [34]" },
+        { value: "room215", label: "Room 215 [8]" },
+        { value: "room219", label: "Room 219 [21]" },
+        { value: "room150", label: "Room 150 [222]" },
+      ],
+    },
+    {
+      imageSrc: "/images/aaa.jpg",
+      radioOptions: [
+        { value: "AAA1", label: "AAA 1 [?]" },
+        { value: "AAA2", label: "AAA 2 [?]" },
+      ],
+    },
+    {
+      imageSrc: "/images/cbb.jpg",
+      radioOptions: [
+        { value: "cbb104", label: "CBB 104 [80]" },
+        { value: "cbb106", label: "CBB 106 [80]" },
+        { value: "cbb108", label: "CBB 108 [80]" },
+        { value: "cbb110", label: "CBB 110 [80]" },
+        { value: "cbb118", label: "CBB 118 [80]" },
+        { value: "cbb120", label: "CBB 120 [80]" },
+        { value: "cbb122", label: "CBB 122 [80]" },
+        { value: "cbb124", label: "CBB 124 [80]" },
+        { value: "cbb214", label: "CBB 214 [48]" },
+      ],
+    },
+    {
+      imageSrc: "/images/cemo.jpg",
+      radioOptions: [
+        { value: "cemo100d", label: "CEMO 100D [431](may be unavailable)" },
+      ],
+    },
+    {
+      imageSrc: "/images/cv.jpg",
+      radioOptions: [{ value: "inprogress", label: "inprogress" }],
+    },
+    {
+      imageSrc: "/images/edrp.jpg",
+      radioOptions: [{ value: "figureitout", label: "figureitout" }],
+    },
+    {
+      imageSrc: "/images/farish.jpg",
+      radioOptions: [
+        { value: "fh101", label: "FH 101 (Kiva Room)[?]" },
+        { value: "fh131", label: "FH 131 [32]" },
+        { value: "fh135", label: "FH 135 [48]" },
+        { value: "fh211", label: "FH 211 [49]" },
+        { value: "fh213", label: "FH 213 [49]" },
+        { value: "fh215", label: "FH 215 [49]" },
+        { value: "fh217", label: "FH 217 [49]" },
+        { value: "fh218", label: "FH 218 [49]" },
+        { value: "fh219", label: "FH 219 [49]" },
+        { value: "fh222a", label: "FH 222 A [49]" },
+        { value: "fh219", label: "FH 219 [49]" },
+        { value: "fh232", label: "FH 232 [70]" },
+        { value: "fh307", label: "FH 307 [44]" },
+      ],
+    },
+    {
+      imageSrc: "/images/fleming.jpg",
+      radioOptions: [
+        { value: "f154", label: "F 154" },
+        { value: "f160", label: "F 160" },
+      ],
+    },
+    {
+      imageSrc: "/images/fred.jpg",
+      radioOptions: [
+        { value: "h28", label: "H 28" },
+        { value: "h30", label: "H 30" },
+        { value: "h34", label: "H 34" },
+      ],
+    },
+    {
+      imageSrc: "/images/garrison.jpg",
+      radioOptions: [
+        { value: "garg201", label: "GAR G 201" },
+        { value: "garg202", label: "GAR G 202" },
+      ],
+    },
+    {
+      imageSrc: "/images/honors.jpg",
+      radioOptions: [{ value: "212C", label: "212C (The Co" }],
+    },
+    {
+      imageSrc: "/images/isabel.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/oberholtzer.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/outdoor.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/pgh.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/sec.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/sr1.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/science.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/student.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/tu2.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
+    {
+      imageSrc: "/images/other.jpg",
+      radioOptions: [{ value: "unavailable", label: "cu" }],
+    },
   ];
 
   return (
@@ -622,117 +771,232 @@ export default function Form() {
       )}
 
       {boolArray[4] && (
-        <div style={{ textAlign: "center", justifyContent: "center" }}>
-          <Slide
-            direction="right"
-            in={boolArray[4]}
-            mountOnEnter
-            unmountOnExit
-            timeout={350}
-          >
-            <h2 style={{ marginTop: "20px" }}>What Room?</h2>
-          </Slide>
-          <Slide
-            direction="left"
-            in={boolArray[4]}
-            mountOnEnter
-            unmountOnExit
-            timeout={350}
-          >
-            <Stack
-              direction="row"
-              spacing={2}
-              style={{
-                width: "100%",
-                margin: "0 auto",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-              <img
-                src="/images/engineering.jpg"
-                alt="Engineering"
-                onClick={handleClick}
-                style={{
-                  width: isExpanded ? "500px" : "200px",
-                  transition: "width 0.3s ease",
-                  cursor: "pointer",
-                }}
-              />
-              <FormControl margin="none" size="small">
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="Commons"
-                  name="radio-buttons-group"
-                >
-                  <FormControlLabel
-                    value="Commons"
-                    control={<Radio />}
-                    label="Commons (Engineering Pit)"
-                  />
-                  <FormControlLabel
-                    value="W205D3"
-                    control={<Radio />}
-                    label="W205 D3 [65]"
-                  />
-                  <FormControlLabel
-                    value="E220D3"
-                    control={<Radio />}
-                    label="E220 D3 [26]"
-                  />
-                  <FormControlLabel
-                    value="102D"
-                    control={<Radio />}
-                    label="102D [44]"
-                  />
-                  <FormControlLabel
-                    value="N61D"
-                    control={<Radio />}
-                    label="N61D [48]"
-                  />
-                  <FormControlLabel
-                    value="W122D3"
-                    control={<Radio />}
-                    label="W122 D3 [124]"
-                  />
-                  <FormControlLabel
-                    value="L2D2"
-                    control={<Radio />}
-                    label="L2D2 [220]"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Stack>
-          </Slide>
-          <Slide
-            direction="up"
-            in={boolArray[4]}
-            mountOnEnter
-            unmountOnExit
-            timeout={350}
-          >
-
-              <div style={{ textAlign: "left",  paddingLeft: "10px"}}>
-                <Typography variant="subtitle1" gutterBottom>
-                  brackets indicate capacity
-                </Typography>
-              </div>
-          </Slide>
+        <div>
+          <RoomSelection
+            imageSrc={rooms[0].imageSrc}
+            radioOptions={rooms[0].radioOptions}
+            slideIn={boolArray[4]}
+          />
         </div>
       )}
 
       {boolArray[5] && (
-        <div style={{ textAlign: "center", justifyContent: "center" }}>
-          <Slide
-            direction="right"
-            in={boolArray[5]}
-            mountOnEnter
-            unmountOnExit
-            timeout={350}
-          >
-            <h2 style={{ marginTop: "20px" }}>Agnes</h2>
-          </Slide>
+        <div>
+          <RoomSelection
+            imageSrc={rooms[1].imageSrc}
+            radioOptions={rooms[1].radioOptions}
+            slideIn={boolArray[5]}
+          />
+        </div>
+      )}
+
+      {boolArray[6] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[2].imageSrc}
+            radioOptions={rooms[2].radioOptions}
+            slideIn={boolArray[6]}
+          />
+        </div>
+      )}
+
+      {boolArray[7] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[3].imageSrc}
+            radioOptions={rooms[3].radioOptions}
+            slideIn={boolArray[7]}
+          />
+        </div>
+      )}
+
+      {boolArray[8] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[4].imageSrc}
+            radioOptions={rooms[4].radioOptions}
+            slideIn={boolArray[8]}
+          />
+        </div>
+      )}
+
+      {boolArray[9] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[5].imageSrc}
+            radioOptions={rooms[5].radioOptions}
+            slideIn={boolArray[9]}
+          />
+        </div>
+      )}
+
+      {boolArray[10] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[6].imageSrc}
+            radioOptions={rooms[6].radioOptions}
+            slideIn={boolArray[10]}
+          />
+        </div>
+      )}
+
+      {boolArray[11] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[7].imageSrc}
+            radioOptions={rooms[7].radioOptions}
+            slideIn={boolArray[11]}
+          />
+        </div>
+      )}
+
+      {boolArray[12] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[8].imageSrc}
+            radioOptions={rooms[8].radioOptions}
+            slideIn={boolArray[12]}
+          />
+        </div>
+      )}
+
+      {boolArray[13] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[9].imageSrc}
+            radioOptions={rooms[9].radioOptions}
+            slideIn={boolArray[13]}
+          />
+        </div>
+      )}
+
+      {boolArray[14] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[10].imageSrc}
+            radioOptions={rooms[10].radioOptions}
+            slideIn={boolArray[14]}
+          />
+        </div>
+      )}
+
+      {boolArray[15] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[11].imageSrc}
+            radioOptions={rooms[11].radioOptions}
+            slideIn={boolArray[15]}
+          />
+        </div>
+      )}
+
+      {boolArray[16] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[12].imageSrc}
+            radioOptions={rooms[12].radioOptions}
+            slideIn={boolArray[16]}
+          />
+        </div>
+      )}
+
+      {boolArray[17] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[13].imageSrc}
+            radioOptions={rooms[13].radioOptions}
+            slideIn={boolArray[17]}
+          />
+        </div>
+      )}
+
+      {boolArray[18] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[14].imageSrc}
+            radioOptions={rooms[14].radioOptions}
+            slideIn={boolArray[18]}
+          />
+        </div>
+      )}
+
+      {boolArray[19] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[15].imageSrc}
+            radioOptions={rooms[15].radioOptions}
+            slideIn={boolArray[19]}
+          />
+        </div>
+      )}
+
+      {boolArray[20] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[16].imageSrc}
+            radioOptions={rooms[16].radioOptions}
+            slideIn={boolArray[20]}
+          />
+        </div>
+      )}
+
+      {boolArray[21] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[17].imageSrc}
+            radioOptions={rooms[17].radioOptions}
+            slideIn={boolArray[21]}
+          />
+        </div>
+      )}
+
+      {boolArray[22] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[18].imageSrc}
+            radioOptions={rooms[18].radioOptions}
+            slideIn={boolArray[22]}
+          />
+        </div>
+      )}
+
+      {boolArray[23] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[19].imageSrc}
+            radioOptions={rooms[19].radioOptions}
+            slideIn={boolArray[23]}
+          />
+        </div>
+      )}
+
+      {boolArray[24] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[20].imageSrc}
+            radioOptions={rooms[20].radioOptions}
+            slideIn={boolArray[24]}
+          />
+        </div>
+      )}
+
+      {boolArray[25] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[21].imageSrc}
+            radioOptions={rooms[21].radioOptions}
+            slideIn={boolArray[25]}
+          />
+        </div>
+      )}
+
+      {boolArray[26] && (
+        <div>
+          <RoomSelection
+            imageSrc={rooms[22].imageSrc}
+            radioOptions={rooms[22].radioOptions}
+            slideIn={boolArray[26]}
+          />
         </div>
       )}
     </div>
