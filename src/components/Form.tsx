@@ -742,7 +742,7 @@ export default function Form() {
           </Slide>
         </div>
       )}
-      <RsTile booleanArray={boolArray} rooms={rooms} i={4} j={23} />
+      <RsTile booleanArray={boolArray} rooms={rooms} i={4} j={27} />
     </div>
   );
 }
