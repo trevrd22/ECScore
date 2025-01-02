@@ -10,12 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import type { Dayjs } from "dayjs";
 import Typography from "@mui/material/Typography";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import RoomSelection from "./RoomSelection";
-import {RsTile} from "./rsTile"
+import { RsTile } from "./RsTile";
 class Answers {
   timestamp: Date;
   name?: string;
@@ -820,7 +815,7 @@ export default function Test() {
           </Slide>
         </div>
       )}
-<RsTile booleanArray={boolArray} rooms={rooms} i={4} j={23}/>
+      <RsTile booleanArray={boolArray} rooms={rooms} i={4} j={23} />
     </div>
   );
 }
