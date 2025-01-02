@@ -7,6 +7,8 @@ interface RadioOption {
 }
 
 interface Room {
+  index: number;
+  name: string;
   imageSrc: string;
   radioOptions: RadioOption[];
 }

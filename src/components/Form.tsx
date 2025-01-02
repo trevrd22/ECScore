@@ -10,12 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Stack from "@mui/material/Stack";
 import type { Dayjs } from "dayjs";
 import Typography from "@mui/material/Typography";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import RoomSelection from "./RoomSelection";
-
+import { RsTile } from "./RsTile";
 class Answers {
   timestamp: Date;
   name?: string;
@@ -256,42 +251,252 @@ export default function Form() {
     );
   };
 
-  const buildings: string[] = [
-    "Cullen College of Engineering Building",
-    "Agnes Arnold Auditorium",
-    "Agnes Arnold Hall",
-    "Architecture Building",
-    "Cemo Hall (CEMO)",
-    "Classroom and Business Building (CBB)",
-    "Cougar Village",
-    "Elizabeth D. Rockwell Pavillion",
-    "Farish Hall",
-    "Fleming Building",
-    "Fred J. Heyne Building",
-    "Garrison Gym",
-    "Honors College",
-    "Isabel C. Cameron",
-    "Oberholtzer Hall",
-    "Philip Guthrie Hoffman Hall (PGH)",
-    "Science and Engineering Complex (SEC)",
-    "Science and Research 1 (SR1)",
-    "Science Building",
-    "Student Center North and South",
-    "Teaching Unit 2",
-    "Other Building",
-    "Outdoor Space",
+  const rooms = [
+    {
+      name: "Cullen College of Engineering Building",
+      index: 4,
+      imageSrc: "/images/engineering.jpg",
+      radioOptions: [
+        { value: "commons", label: "Commons (Engineering Pit)" },
+        { value: "w205d3", label: "W205 D3 [65]" },
+        { value: "e220d3", label: "E220 D3 [26]" },
+        { value: "102d", label: "102D [44]" },
+        { value: "n61d", label: "N61D [48]" },
+        { value: "w122d3", label: "W122 D3 [124]" },
+        { value: "l2d2", label: "L2D2 [220]" },
+      ],
+    },
+    {
+      name: "Agnes Arnold Auditorium",
+      index: 5,
+      imageSrc: "/images/aaa.jpg",
+      radioOptions: [
+        { value: "AAA1", label: "AAA 1 [?]" },
+        { value: "AAA2", label: "AAA 2 [?]" },
+      ],
+    },
+    {
+      name: "Agnes Arnold Hall",
+      index: 6,
+      imageSrc: "/images/agnes.jpg",
+      radioOptions: [{ value: "unavailable", label: "Currently Unavailable!" }],
+    },
+    {
+      name: "Architecture Building",
+      index: 7,
+      imageSrc: "/images/archi.jpg",
+      radioOptions: [
+        { value: "room402", label: "Room 402 [40]" },
+        { value: "room209", label: "Room 209 [34]" },
+        { value: "room215", label: "Room 215 [8]" },
+        { value: "room219", label: "Room 219 [21]" },
+        { value: "room150", label: "Room 150 [222]" },
+      ],
+    },
+    {
+      name: "Classroom and Business Building (CBB)",
+      index: 8,
+      imageSrc: "/images/cbb.jpg",
+      radioOptions: [
+        { value: "cbb104", label: "CBB 104 [80]" },
+        { value: "cbb106", label: "CBB 106 [80]" },
+        { value: "cbb108", label: "CBB 108 [80]" },
+        { value: "cbb110", label: "CBB 110 [80]" },
+        { value: "cbb118", label: "CBB 118 [80]" },
+        { value: "cbb120", label: "CBB 120 [80]" },
+        { value: "cbb122", label: "CBB 122 [80]" },
+        { value: "cbb124", label: "CBB 124 [80]" },
+        { value: "cbb214", label: "CBB 214 [48]" },
+      ],
+    },
+    {
+      name: "Cemo Hall (CEMO)",
+      index: 9,
+      imageSrc: "/images/cemo.jpg",
+      radioOptions: [
+        { value: "cemo100d", label: "CEMO 100D [431](may be unavailable)" },
+      ],
+    },
+    {
+      name: "Cougar Village",
+      index: 10,
+      imageSrc: "/images/cv.jpg",
+      radioOptions: [{ value: "inprogress", label: "inprogress" }],
+    },
+    {
+      name: "Elizabeth D. Rockwell Pavillion",
+      index: 11,
+      imageSrc: "/images/edrp.jpg",
+      radioOptions: [{ value: "figureitout", label: "figureitout" }],
+    },
+    {
+      name: "Farish Hall",
+      index: 12,
+      imageSrc: "/images/farish.jpg",
+      radioOptions: [
+        { value: "fh101", label: "FH 101 (Kiva Room)[?]" },
+        { value: "fh131", label: "FH 131 [32]" },
+        { value: "fh135", label: "FH 135 [48]" },
+        { value: "fh211", label: "FH 211 [49]" },
+        { value: "fh213", label: "FH 213 [49]" },
+        { value: "fh215", label: "FH 215 [49]" },
+        { value: "fh217", label: "FH 217 [49]" },
+        { value: "fh218", label: "FH 218 [49]" },
+        { value: "fh219", label: "FH 219 [49]" },
+        { value: "fh222a", label: "FH 222 A [49]" },
+        { value: "fh232", label: "FH 232 [70]" },
+        { value: "fh307", label: "FH 307 [44]" },
+      ],
+    },
+    {
+      name: "Fleming Building",
+      index: 13,
+      imageSrc: "/images/fleming.jpg",
+      radioOptions: [
+        { value: "f154", label: "F 154 [40]" },
+        { value: "f160", label: "F 160 [308]" },
+      ],
+    },
+    {
+      name: "Fred J. Heyne Building",
+      index: 14,
+      imageSrc: "/images/fred.jpg",
+      radioOptions: [
+        { value: "h28", label: "H 28 [?]" },
+        { value: "h30", label: "H 30 [?]" },
+        { value: "h34", label: "H 34 [?]" },
+      ],
+    },
+    {
+      name: "Garrison Gym",
+      index: 15,
+      imageSrc: "/images/garrison.jpg",
+      radioOptions: [
+        { value: "garg201", label: "GAR G 201 [97]" },
+        { value: "garg202", label: "GAR G 202 [164]" },
+      ],
+    },
+    {
+      name: "Honors College",
+      index: 16,
+      imageSrc: "/images/honors.jpg",
+      radioOptions: [
+        { value: "212c", label: "212C (The Commons)[60]" },
+        { value: "212s", label: "212S (Large Classroom)[49] " },
+        { value: "212p", label: "212P (Martel Room)[20]" },
+        { value: "202b", label: "202B (Deans Conference Room)[10]" },
+        { value: "212d", label: "212D (Estess Library)[24]" },
+        { value: "212j", label: "212J (Fishbowl 1)[22]" },
+        { value: "212l", label: "212L (Fishbowl 2)[25]" },
+        { value: "212", label: "212 (Computer Center)[16]" },
+      ],
+    },
+    {
+      name: "Isabel C. Cameron",
+      index: 17,
+      imageSrc: "/images/isabel.jpg",
+      radioOptions: [
+        { value: "cam105", label: "CAM 105 [28]" },
+        { value: "cam101", label: "CAM 101 [69]" },
+        { value: "cam103", label: "CAM 103 [29]" },
+      ],
+    },
+    {
+      name: "Oberholtzer Hall",
+      index: 18,
+      imageSrc: "/images/oberholtzer.jpg",
+      radioOptions: [{ value: "inprogress", label: "Ober-inprogress" }],
+    },
+    {
+      name: "Outdoor Space",
+      index: 19,
+      imageSrc: "/images/outdoor.jpg",
+      radioOptions: [{ value: "inprogress", label: "outdoor-inprogress" }],
+    },
+    {
+      name: "Philip Guthrie Hoffman Hall (PGH)",
+      index: 20,
+      imageSrc: "/images/pgh.jpg",
+      radioOptions: [{ value: "inprogress", label: "PGH-inprogress" }],
+    },
+    {
+      name: "Science and Engineering Complex (SEC)",
+      index: 21,
+      imageSrc: "/images/sec.jpg",
+      radioOptions: [
+        { value: "sec100", label: "SEC 100 (SEC Auditorium)[546]" },
+        { value: "sec101", label: "SEC 101 [280]" },
+        { value: "sec102", label: "SEC 102 [228]" },
+        { value: "sec104", label: "SEC 104 [136]" },
+        { value: "sec105", label: "SEC 105 [109]" },
+        { value: "sec201", label: "SEC 201 [56]" },
+        { value: "sec202", label: "SEC 202 [60]" },
+        { value: "sec203", label: "SEC 203 [55]" },
+        { value: "sec204", label: "SEC 204 [63]" },
+        { value: "sec205", label: "SEC 205 [61]" },
+        { value: "sec206", label: "SEC 206 [61]" },
+      ],
+    },
+    {
+      name: "Science and Research 1 (SR1)",
+      index: 22,
+      imageSrc: "/images/sr1.jpg",
+      radioOptions: [
+        { value: "sr116", label: "SR 116 [202]" },
+        { value: "sr117", label: "SR 117 [303]" },
+      ],
+    },
+    {
+      name: "Science Building",
+      index: 23,
+      imageSrc: "/images/science.jpg",
+      radioOptions: [
+        { value: "s101", label: "S 101 [36]" },
+        { value: "s102", label: "S 102 [38]" },
+        { value: "s105", label: "S 105 [96]" },
+        { value: "s114", label: "S 114 [50]" },
+        { value: "s116", label: "S 116 [46]" },
+        { value: "s120", label: "S 120 [42]" },
+        { value: "s202", label: "S 202 [36]" },
+      ],
+    },
+    {
+      name: "Student Center North and South",
+      index: 24,
+      imageSrc: "/images/student.jpg",
+      radioOptions: [{ value: "inprogress", label: "student-inprogress" }],
+    },
+    {
+      name: "Teaching Unit 2",
+      index: 25,
+      imageSrc: "/images/tu2.jpg",
+      radioOptions: [
+        { value: "tu2144", label: "TU2 144 [106]" },
+        { value: "tu2211", label: "TU2 211 [72]" },
+        { value: "tu2215", label: "TU2 215 [35]" },
+        { value: "tu2240", label: "TU2 240 [98]" },
+      ],
+    },
+    {
+      name: "Other Building",
+      index: 26,
+      imageSrc: "/images/other.jpg",
+      radioOptions: [{ value: "figureitout", label: "other-figureitout" }],
+    },
   ];
+
+  const buildings = rooms.map(room => room.name);
+
 
   interface RadioOption {
     value: string;
     label: string;
   }
-  
+
   interface Room {
     imageSrc: string;
     radioOptions: RadioOption[];
   }
-
 
   const names = [
     "Richard Luong",
@@ -309,194 +514,6 @@ export default function Form() {
     "Mi Mach",
     "Trevor Drummond",
     "Trieu Dinh",
-  ];
-
-  const rooms: Room[] = [
-    {
-      imageSrc: "/images/engineering.jpg",
-      radioOptions: [
-        { value: "commons", label: "Commons (Engineering Pit)" },
-        { value: "w205d3", label: "W205 D3 [65]" },
-        { value: "e220d3", label: "E220 D3 [26]" },
-        { value: "102d", label: "102D [44]" },
-        { value: "n61d", label: "N61D [48]" },
-        { value: "w122d3", label: "W122 D3 [124]" },
-        { value: "l2d2", label: "L2D2 [220]" },
-      ],
-    },
-    {
-      imageSrc: "/images/aaa.jpg",
-      radioOptions: [
-        { value: "AAA1", label: "AAA 1 [?]" },
-        { value: "AAA2", label: "AAA 2 [?]" },
-      ],
-    },
-    {
-      imageSrc: "/images/agnes.jpg",
-      radioOptions: [{ value: "unavailable", label: "Currently Unavailable!" }],
-    },
-    {
-      imageSrc: "/images/archi.jpg",
-      radioOptions: [
-        { value: "room402", label: "Room 402 [40]" },
-        { value: "room209", label: "Room 209 [34]" },
-        { value: "room215", label: "Room 215 [8]" },
-        { value: "room219", label: "Room 219 [21]" },
-        { value: "room150", label: "Room 150 [222]" },
-      ],
-    },
-    {
-      imageSrc: "/images/cemo.jpg",
-      radioOptions: [
-        { value: "cemo100d", label: "CEMO 100D [431](may be unavailable)" },
-      ],
-    },
-    {
-      imageSrc: "/images/cbb.jpg",
-      radioOptions: [
-        { value: "cbb104", label: "CBB 104 [80]" },
-        { value: "cbb106", label: "CBB 106 [80]" },
-        { value: "cbb108", label: "CBB 108 [80]" },
-        { value: "cbb110", label: "CBB 110 [80]" },
-        { value: "cbb118", label: "CBB 118 [80]" },
-        { value: "cbb120", label: "CBB 120 [80]" },
-        { value: "cbb122", label: "CBB 122 [80]" },
-        { value: "cbb124", label: "CBB 124 [80]" },
-        { value: "cbb214", label: "CBB 214 [48]" },
-      ],
-    },
-    {
-      imageSrc: "/images/cv.jpg",
-      radioOptions: [{ value: "inprogress", label: "inprogress" }],
-    },
-    {
-      imageSrc: "/images/edrp.jpg",
-      radioOptions: [{ value: "figureitout", label: "figureitout" }],
-    },
-    {
-      imageSrc: "/images/farish.jpg",
-      radioOptions: [
-        { value: "fh101", label: "FH 101 (Kiva Room)[?]" },
-        { value: "fh131", label: "FH 131 [32]" },
-        { value: "fh135", label: "FH 135 [48]" },
-        { value: "fh211", label: "FH 211 [49]" },
-        { value: "fh213", label: "FH 213 [49]" },
-        { value: "fh215", label: "FH 215 [49]" },
-        { value: "fh217", label: "FH 217 [49]" },
-        { value: "fh218", label: "FH 218 [49]" },
-        { value: "fh219", label: "FH 219 [49]" },
-        { value: "fh222a", label: "FH 222 A [49]" },
-        { value: "fh219", label: "FH 219 [49]" },
-        { value: "fh232", label: "FH 232 [70]" },
-        { value: "fh307", label: "FH 307 [44]" },
-      ],
-    },
-    {
-      imageSrc: "/images/fleming.jpg",
-      radioOptions: [
-        { value: "f154", label: "F 154 [40]" },
-        { value: "f160", label: "F 160 [308]" },
-      ],
-    },
-    {
-      imageSrc: "/images/fred.jpg",
-      radioOptions: [
-        { value: "h28", label: "H 28 [?]" },
-        { value: "h30", label: "H 30 [?]" },
-        { value: "h34", label: "H 34 [?]" },
-      ],
-    },
-    {
-      imageSrc: "/images/garrison.jpg",
-      radioOptions: [
-        { value: "garg201", label: "GAR G 201 [97]" },
-        { value: "garg202", label: "GAR G 202 [164]" },
-      ],
-    },
-    {
-      imageSrc: "/images/honors.jpg",
-      radioOptions: [
-        { value: "212c", label: "212C (The Commons)[60]" },
-        { value: "212s", label: "212S (Large Classroom)[49] " },
-        { value: "212p", label: "212P (Martel Room)[20]" },
-        { value: "202b", label: "202B (Deans Conference Room)[10]" },
-        { value: "212d", label: "212D (Estess Library)[24]" },
-        { value: "212j", label: "212J (Fishbowl 1)[22]" },
-        { value: "212l", label: "212L (Fishbowl 2)[25]" },
-        { value: "212", label: "212 (Computer Center)[16]" },
-      ],
-    },
-    {
-      imageSrc: "/images/isabel.jpg",
-      radioOptions: [
-        { value: "cam105", label: "CAM 105 [28]" },
-        { value: "cam101", label: "CAM 101 [69]" },
-        { value: "cam103", label: "CAM 103 [29]" },
-      ],
-    },
-    {
-      imageSrc: "/images/oberholtzer.jpg",
-      radioOptions: [{ value: "inprogress", label: "Ober-inprogress" }],
-    },
-    {
-      imageSrc: "/images/pgh.jpg",
-      radioOptions: [{ value: "inprogress", label: "PGH-inprogress" }],
-    },
-    {
-      imageSrc: "/images/sec.jpg",
-      radioOptions: [
-        { value: "sec100", label: "SEC 100 (SEC Auditorium)[546]" },
-        { value: "sec101", label: "SEC 101 [280]" },
-        { value: "sec102", label: "SEC 102 [228]" },
-        { value: "sec104", label: "SEC 104 [136]" },
-        { value: "sec105", label: "SEC 105 [109]" },
-        { value: "sec201", label: "SEC 201 [56]" },
-        { value: "sec202", label: "SEC 202 [60]" },
-        { value: "sec203", label: "SEC 203 [55]" },
-        { value: "sec204", label: "SEC 204 [63]" },
-        { value: "sec205", label: "SEC 205 [61]" },
-        { value: "sec206", label: "SEC 206 [61]" },
-      ],
-    },
-    {
-      imageSrc: "/images/sr1.jpg",
-      radioOptions: [
-        { value: "sr116", label: "SR 116 [202]" },
-        { value: "sr117", label: "SR 117 [303]" },
-      ],
-    },
-    {
-      imageSrc: "/images/science.jpg",
-      radioOptions: [
-        { value: "s101", label: "S 101 [36]" },
-        { value: "s102", label: "S 102 [38]" },
-        { value: "s105", label: "S 105 [96]" },
-        { value: "s114", label: "S 114 [50]" },
-        { value: "s116", label: "S 116 [46]" },
-        { value: "s120", label: "S 120 [42]" },
-        { value: "s202", label: "S 202 [36]" },
-      ],
-    },
-    {
-      imageSrc: "/images/student.jpg",
-      radioOptions: [{ value: "inprogress", label: "student-inprogress" }],
-    },
-    {
-      imageSrc: "/images/tu2.jpg",
-      radioOptions: [{ value: "tu2144", label: "TU2 144 [106]" },
-        { value: "tu2211", label: "TU2 211 [72]" },
-        { value: "tu2215", label: "TU2 215 [35]" },
-        { value: "tu2240", label: "TU2 240 [98]" },
-      ],
-    },
-    {
-      imageSrc: "/images/other.jpg",
-      radioOptions: [{ value: "figureitout", label: "other-figureitout" }],
-    },
-    {
-      imageSrc: "/images/outdoor.jpg",
-      radioOptions: [{ value: "inprogress", label: "outdoor-inprogress" }],
-    },
   ];
 
   return (
@@ -679,120 +696,25 @@ export default function Form() {
               }}
             >
               <Autocomplete
-                id="buildingInput"
-                autoSelect
-                fullWidth
-                sx={{ width: 375 }}
-                options={buildings}
-                onChange={(event, newValue) => {
-                  if (newValue) {
-                    answer.setBuilding(newValue); // Update the selected name
-                    console.log(answer.getBuilding());
-                    /* This will be the key to which indice is which*/
-                    switch (answer.getBuilding()) {
-                      case "Cullen College of Engineering Building":
-                        toggleIndexTemp(4);
-                        break;
+  id="buildingInput"
+  autoSelect
+  fullWidth
+  sx={{ width: 375 }}
+  options={buildings}
+  onChange={(event, newValue) => {
+    if (newValue) {
+      answer.setBuilding(newValue); // Update the selected name
+      console.log(answer.getBuilding());
+      
+      const room = rooms.find(r => r.name === answer.getBuilding());
+      toggleIndexTemp(room ? room.index : -1);
 
-                      case "Agnes Arnold Auditorium":
-                        toggleIndexTemp(5);
-                        break;
-
-                      case "Agnes Arnold Hall":
-                        toggleIndexTemp(6);
-                        break;
-
-                      case "Architecture Building":
-                        toggleIndexTemp(7);
-                        break;
-
-                      case "Classroom and Business Building (CBB)":
-                        toggleIndexTemp(8);
-                        break;
-
-                      case "Cemo Hall (CEMO)":
-                        toggleIndexTemp(9);
-                        break;
-
-                      case "Cougar Village":
-                        toggleIndexTemp(10);
-                        break;
-
-                      case "Elizabeth D. Rockwell Pavillion":
-                        toggleIndexTemp(11);
-                        break;
-
-                      case "Farish Hall":
-                        toggleIndexTemp(12);
-                        break;
-
-                      case "Fleming Building":
-                        toggleIndexTemp(13);
-                        break;
-
-                      case "Fred J. Heyne Building":
-                        toggleIndexTemp(14);
-                        break;
-
-                      case "Garrison Gym":
-                        toggleIndexTemp(15);
-                        break;
-
-                      case "Honors College":
-                        toggleIndexTemp(16);
-                        break;
-
-                      case "Isabel C. Cameron":
-                        toggleIndexTemp(17);
-                        break;
-
-                      case "Oberholtzer Hall":
-                        toggleIndexTemp(18);
-                        break;
-
-                      case "Outdoor Space":
-                        toggleIndexTemp(19);
-                        break;
-
-                      case "Philip Guthrie Hoffman Hall (PGH)":
-                        toggleIndexTemp(20);
-                        break;
-
-                      case "Science and Engineering Complex (SEC)":
-                        toggleIndexTemp(21);
-                        break;
-
-                      case "Science and Research 1 (SR1)":
-                        toggleIndexTemp(22);
-                        break;
-
-                      case "Science Building":
-                        toggleIndexTemp(23);
-                        break;
-
-                      case "Student Center North and South":
-                        toggleIndexTemp(24);
-                        break;
-
-                      case "Teaching Unit 2":
-                        toggleIndexTemp(25);
-                        break;
-
-                      case "Other Building":
-                        toggleIndexTemp(26);
-                        break;
-
-                      default:
-                        // Optional default case
-                        console.log("Building not found or selected");
-                        break;
-                    }
-                  }
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Building" />
-                )}
-              />
+    }
+  }}
+  renderInput={(params) => (
+    <TextField {...params} label="Building" />
+  )}
+/>
             </Box>
           </Slide>
           <Slide
@@ -820,236 +742,7 @@ export default function Form() {
           </Slide>
         </div>
       )}
-
-      {boolArray[4] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[0].imageSrc}
-            radioOptions={rooms[0].radioOptions}
-            slideIn={boolArray[4]}
-          />
-        </div>
-      )}
-
-      {boolArray[5] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[1].imageSrc}
-            radioOptions={rooms[1].radioOptions}
-            slideIn={boolArray[5]}
-          />
-        </div>
-      )}
-
-      {boolArray[6] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[2].imageSrc}
-            radioOptions={rooms[2].radioOptions}
-            slideIn={boolArray[6]}
-          />
-        </div>
-      )}
-
-      {boolArray[7] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[3].imageSrc}
-            radioOptions={rooms[3].radioOptions}
-            slideIn={boolArray[7]}
-          />
-        </div>
-      )}
-
-      {boolArray[8] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[4].imageSrc}
-            radioOptions={rooms[4].radioOptions}
-            slideIn={boolArray[8]}
-          />
-        </div>
-      )}
-
-      {boolArray[9] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[5].imageSrc}
-            radioOptions={rooms[5].radioOptions}
-            slideIn={boolArray[9]}
-          />
-        </div>
-      )}
-
-      {boolArray[10] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[6].imageSrc}
-            radioOptions={rooms[6].radioOptions}
-            slideIn={boolArray[10]}
-          />
-        </div>
-      )}
-
-      {boolArray[11] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[7].imageSrc}
-            radioOptions={rooms[7].radioOptions}
-            slideIn={boolArray[11]}
-          />
-        </div>
-      )}
-
-      {boolArray[12] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[8].imageSrc}
-            radioOptions={rooms[8].radioOptions}
-            slideIn={boolArray[12]}
-          />
-        </div>
-      )}
-
-      {boolArray[13] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[9].imageSrc}
-            radioOptions={rooms[9].radioOptions}
-            slideIn={boolArray[13]}
-          />
-        </div>
-      )}
-
-      {boolArray[14] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[10].imageSrc}
-            radioOptions={rooms[10].radioOptions}
-            slideIn={boolArray[14]}
-          />
-        </div>
-      )}
-
-      {boolArray[15] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[11].imageSrc}
-            radioOptions={rooms[11].radioOptions}
-            slideIn={boolArray[15]}
-          />
-        </div>
-      )}
-
-      {boolArray[16] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[12].imageSrc}
-            radioOptions={rooms[12].radioOptions}
-            slideIn={boolArray[16]}
-          />
-        </div>
-      )}
-
-      {boolArray[17] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[13].imageSrc}
-            radioOptions={rooms[13].radioOptions}
-            slideIn={boolArray[17]}
-          />
-        </div>
-      )}
-
-      {boolArray[18] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[14].imageSrc}
-            radioOptions={rooms[14].radioOptions}
-            slideIn={boolArray[18]}
-          />
-        </div>
-      )}
-
-      {boolArray[19] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[15].imageSrc}
-            radioOptions={rooms[15].radioOptions}
-            slideIn={boolArray[19]}
-          />
-        </div>
-      )}
-
-      {boolArray[20] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[16].imageSrc}
-            radioOptions={rooms[16].radioOptions}
-            slideIn={boolArray[20]}
-          />
-        </div>
-      )}
-
-      {boolArray[21] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[17].imageSrc}
-            radioOptions={rooms[17].radioOptions}
-            slideIn={boolArray[21]}
-          />
-        </div>
-      )}
-
-      {boolArray[22] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[18].imageSrc}
-            radioOptions={rooms[18].radioOptions}
-            slideIn={boolArray[22]}
-          />
-        </div>
-      )}
-
-      {boolArray[23] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[19].imageSrc}
-            radioOptions={rooms[19].radioOptions}
-            slideIn={boolArray[23]}
-          />
-        </div>
-      )}
-
-      {boolArray[24] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[20].imageSrc}
-            radioOptions={rooms[20].radioOptions}
-            slideIn={boolArray[24]}
-          />
-        </div>
-      )}
-
-      {boolArray[25] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[21].imageSrc}
-            radioOptions={rooms[21].radioOptions}
-            slideIn={boolArray[25]}
-          />
-        </div>
-      )}
-
-      {boolArray[26] && (
-        <div>
-          <RoomSelection
-            imageSrc={rooms[22].imageSrc}
-            radioOptions={rooms[22].radioOptions}
-            slideIn={boolArray[26]}
-          />
-        </div>
-      )}
+      <RsTile booleanArray={boolArray} rooms={rooms} i={4} j={23} />
     </div>
   );
 }
