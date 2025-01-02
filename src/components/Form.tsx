@@ -485,18 +485,7 @@ export default function Form() {
     },
   ];
 
-  const buildings = rooms.map(room => room.name);
-
-
-  interface RadioOption {
-    value: string;
-    label: string;
-  }
-
-  interface Room {
-    imageSrc: string;
-    radioOptions: RadioOption[];
-  }
+  const buildings = rooms.map((room) => room.name);
 
   const names = [
     "Richard Luong",
@@ -696,25 +685,26 @@ export default function Form() {
               }}
             >
               <Autocomplete
-  id="buildingInput"
-  autoSelect
-  fullWidth
-  sx={{ width: 375 }}
-  options={buildings}
-  onChange={(event, newValue) => {
-    if (newValue) {
-      answer.setBuilding(newValue); // Update the selected name
-      console.log(answer.getBuilding());
-      
-      const room = rooms.find(r => r.name === answer.getBuilding());
-      toggleIndexTemp(room ? room.index : -1);
+                id="buildingInput"
+                autoSelect
+                fullWidth
+                sx={{ width: 375 }}
+                options={buildings}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    answer.setBuilding(newValue); // Update the selected name
+                    console.log(answer.getBuilding());
 
-    }
-  }}
-  renderInput={(params) => (
-    <TextField {...params} label="Building" />
-  )}
-/>
+                    const room = rooms.find(
+                      (r) => r.name === answer.getBuilding()
+                    );
+                    toggleIndexTemp(room ? room.index : -1);
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Building" />
+                )}
+              />
             </Box>
           </Slide>
           <Slide
@@ -742,7 +732,47 @@ export default function Form() {
           </Slide>
         </div>
       )}
+
       <RsTile booleanArray={boolArray} rooms={rooms} i={4} j={27} />
+
+      {/* Honors Student Question*/}
+      {boolArray[27] && boolArray[28] && (
+        <div style={{ textAlign: "center", justifyContent: "center" }}>
+          <Slide
+            direction="left"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <h2 style={{ marginTop: "20px" }}>Are you or a member attending this event an honors student?<br/> If so write the name of the honors student. (This would give us priority)</h2>
+          </Slide>
+          <Box
+            component="form"
+            sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+            noValidate
+            autoComplete="off"
+          />
+          <Slide
+            direction="right"
+            in={true}
+            mountOnEnter
+            unmountOnExit
+            timeout={350}
+          >
+            <TextField
+              id="eventTitle"
+              label="Title"
+              variant="outlined"
+              onChange={(event) => {
+                const eventTitle = event.target.value.trim(); // Get the input value
+                answer.setEventTitle(eventTitle); // Update the answer object
+                toggleIndexPerm(1);
+              }}
+            />
+          </Slide>
+        </div>
+      )}
     </div>
   );
 }
