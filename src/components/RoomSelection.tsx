@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState } from "react";
-import  "./Form";
+import Answers from "./Answers";
 import {
   Slide,
   Stack,
@@ -12,12 +12,14 @@ import {
 } from "@mui/material";
 
 interface RoomSelectionProps {
+  answerTemp: Answers;
   imageSrc: string;
   radioOptions: { value: string; label: string }[]; // Array of radio options
   slideIn: boolean;
 }
 
 const RoomSelection: React.FC<RoomSelectionProps> = ({
+  answerTemp,
   imageSrc,
   radioOptions,
   slideIn,
@@ -63,7 +65,11 @@ const RoomSelection: React.FC<RoomSelectionProps> = ({
 
           {/* Radio Options */}
           <FormControl margin="none" size="small">
-            <RadioGroup defaultValue={radioOptions[0]?.value} name="radio-buttons-group">
+            <RadioGroup defaultValue={radioOptions[0]?.value} name="radio-buttons-group" onChange={(event) => {
+                const eventTitle = event.target.value.trim(); // Get the input value
+                answerTemp.setEventTitle(eventTitle); // Update the answer object
+                toggleIndexPerm(1);
+              }}>
               {radioOptions.map((option) => (
                 <FormControlLabel
                   key={option.value}
