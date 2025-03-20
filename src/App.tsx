@@ -1,7 +1,7 @@
 import FrontPage from "./components/FrontPage";
 import StatTrak from "./components/StatTrak";
 import Form from "./components/Form";
-import Test from "./components/test";
+import Test from "./components/Test";
 import "./App.css";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
